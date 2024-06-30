@@ -1,0 +1,164 @@
+{% load static %}
+<html>
+<head>
+
+    <title>
+        {% block 'title' %}
+       Employee Home
+        {% endblock %}
+    </title>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<style>
+
+ {% block 'style' %}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+h1, h2 {
+    color: #444;
+}
+h3 {
+    color: #999;
+}
+.btn {
+    background: #f05462;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    color: #f05462;
+    padding: 3px 8px;
+    border: 2px solid #f05462;
+    background: white;
+}
+.side-menu {
+    position: fixed;
+    background: #f05462;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+.side-menu ul {
+    padding: 0;
+}
+.side-menu li {
+    font-size: 24px;
+    padding: 10px 40px;
+    color: white;
+    display: flex;
+
+}
+.side-menu img {
+    margin-right: 10px;
+}
+.content {
+    margin-left: 20vw;
+    padding: 20px;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content h3 {
+    margin-top: 20px;
+}
+.content .icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap:100px;
+}
+.content .icons p {
+    margin: 0 20px;
+    font-size: 24px;
+    text-align: center;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+
+}
+.content .icons p i{
+    font-size:100px;
+    color:#f05462;
+}
+.content span{
+    background-color:yellow;
+    padding:10px;
+    border-radius:20px;
+
+}
+
+        {% endblock %}
+
+    </style>
+
+
+
+</head>
+<body>
+
+
+
+
+  <div class="side-menu">
+
+        <ul>
+            <br><br><br><br><br>
+           <li><img src="dashboard (2).png" alt="">&nbsp;<a href="{% url 'stdhome' %}"> <span style="color:white;">Dashboard</span> </a></li>
+            <br>
+            <li><img src="dashboard (2).png" alt="">&nbsp;<a href="{% url 'stdprofile' %}"> <span style="color:white;">Student Profile</span> </a></li>
+            <br>
+            <li><img src="dashboard (2).png" alt="">&nbsp;<a href="{% url 'stdchangepwd' %}"> <span style="color:white;">Change Password</span> </a></li>
+            <br>
+            <li><img src="dashboard (2).png" alt="">&nbsp;<a href="{% url 'viewsproducts' %}"> <span style="color:white;"> View Courses</span> </a></li>
+            <br>
+
+            <li><img src="dashboard (2).png" alt="">&nbsp;<a href="{% url 'stdlogout' %}"> <span style="color:white;">Logout</span> </a></li>
+                        <br>
+
+        </ul>
+    </div>
+
+
+
+<br><br>
+
+
+{% block 'body' %}
+  <div class="content">
+    <h1>Hi, {{sname}}</h1>
+    <div class="icons">
+        <p><i class='bx bxs-certification'></i> Certifications <span>0</span></p>
+        <p><i class='bx bxs-card'></i> Projects <span>0</span></p>
+        <p><i class='bx bxs-objects-vertical-bottom'></i> Internships <span>0</span></p>
+        <p><i class='bx bxs-shopping-bags'></i> Backlogs <span>0</span></p>
+
+    </div>
+</div>
+{% endblock %}
+
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+        Employee Login
+
+    </title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url("https://img.freepik.com/free-vector/gradient-erp-illustration_23-2149373210.jpg?size=626&ext=jpg&ga=GA1.1.381398045.1711288661&semt=sph");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: linear-gradient(
+                90deg,
+                rgba(2, 0, 36, 1) 22%,
+                rgba(247, 142, 250, 1) 46%,
+                rgba(142, 8, 8, 1) 78%,
+                rgba(0, 212, 255, 1) 100%
+            );
+            box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+        }
+
+        .logo {
+            font-size: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logo:hover {
+            color: aqua;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+        }
+
+        header nav ul li a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-weight: 600;
+            position: relative; /* Added to contain dropdown content */
+        }
+
+        header nav ul li a:hover {
+            color: aqua;
+        }
+
+        .dropbtn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            max-width: 200px; /* Set max-width to prevent expanding */
+            width: 100%; /* Ensure content fits within the dropdown */
+            z-index: 1;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .container {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding-top: 80px;
+            gap: 30px;
+        }
+
+        form {
+            height: 350px;
+            width: 350px;
+            display: flex;
+            flex-wrap: nowrap;
+            padding: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            border-radius: 10px;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            margin-bottom: 50px;
+        }
+
+        input {
+            height: 50px;
+            width: 250px;
+            border-radius: 35px;
+            border: none;
+        }
+
+        button {
+            height: 40px;
+            width: 120px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #FFCC70;
+        }
+
+        ::placeholder {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a class="logo" href="{% url 'index' %}">ERP</a>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Login</a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'adminlogin' %}">Admin</a>
+                        <a href="{% url 'stdlogin' %}">Student</a>
+                        <a href="{% url 'emplogin' %}">Faculty</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Signup</a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'stdregistration' %}">Student</a>
+                        <a href="{% url 'empregistration' %}">Faculty</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h3 align="center"><mark>{{msg}}</mark></h3>
+        <h1 style="color: white; font-size: 40px;">Employee Login Form</h1>
+
+        <form method="post" action="{%url 'checkemplogin' %}">
+		{% csrf_token %}
+            <input placeholder="Username" type="text" name="eusername" required="required">
+            <input placeholder="Password" type="password" name="epassword" required="required">
+            <button type="submit" value="Login">Login</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Student Registration
+        {% endblock %}
+    </title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: url("https://img.freepik.com/free-vector/gradient-erp-illustration_23-2149373210.jpg?size=626&ext=jpg&ga=GA1.1.381398045.1711288661&semt=sph");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+        .screen {
+            background: linear-gradient(90deg, #5D54A4, #7C78B8);
+            position: relative;
+            width: 400px;
+            padding: 40px;
+            box-shadow: 0px 0px 24px #5C5696;
+            border-radius: 10px;
+        }
+        .screen__content {
+            position: relative;
+        }
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-field {
+            margin-bottom: 20px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .form-field input, .form-field select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        .form-field input:focus, .form-field select:focus {
+            outline: none;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background-color: #FFCC70;
+            color: #4C489D;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #FFB347;
+        }
+        .message {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: linear-gradient(
+                90deg,
+                rgba(2, 0, 36, 1) 22%,
+                rgba(247, 142, 250, 1) 46%,
+                rgba(142, 8, 8, 1) 78%,
+                rgba(0, 212, 255, 1) 100%
+            );
+            box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+        }
+        .logo {
+            font-size: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logo:hover {
+            color: aqua;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+        }
+        header nav ul li a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-weight: 600;
+            position: relative;
+        }
+        header nav ul li a:hover {
+            color: aqua;
+        }
+        .dropbtn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            max-width: 200px;
+            width: 100%;
+            z-index: 1;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="logo" href="{% url 'index' %}">ERP</a>
+    <nav>
+        <ul>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Login</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'adminlogin' %}">Admin</a>
+                    <a href="{% url 'stdlogin' %}">Student</a>
+                    <a href="{% url 'emplogin' %}">Faculty</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Signup</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'stdregistration' %}">Student</a>
+                    <a href="{% url 'empregistration' %}">Faculty</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <h2>Student Registration</h2>
+            <div class="message">{{ msg }}</div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in stdform %}
+                    <div class="form-field">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="submit-button">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
