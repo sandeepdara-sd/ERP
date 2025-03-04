@@ -22,9 +22,6 @@ This is a **full-fledged ERP (Enterprise Resource Planning) system** built using
 - 🎨 **CSS** - Styling for an interactive UI
 - 🍿 **Django Templates** - Dynamic content rendering
 
-## 👅 Live Demo
-🔗 **[ERP System Live](https://your-deployment-link.com)**
-
 ## 👥 User Roles
 - **Admin**: Full access to manage users, products, and inventory
 - **Manager**: Limited access to inventory and reports
